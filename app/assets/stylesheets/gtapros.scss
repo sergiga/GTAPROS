@@ -62,6 +62,26 @@ body .container {
         margin: 0;
         font-weight: lighter;
     }
+
+    span {
+        font-weight: lighter;
+        color: #D32F2F;
+        display: none;
+    }
+}
+
+.input-wrapper.login-error {
+    label {
+        color: #D32F2F !important;
+    }
+
+    .input-text {
+        border-bottom: 2px solid #D32F2F;
+    }
+
+    span {
+        display: block !important;
+    }
 }
 
 .input-text {
@@ -78,7 +98,7 @@ body .container {
 }
 
 .input-text:focus {
-    border-bottom: 2px solid #009688;
+    border-bottom: 2px solid #009688 !important;
 }
 
 .btn-material {

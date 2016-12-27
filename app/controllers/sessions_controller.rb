@@ -6,11 +6,14 @@ class SessionsController < ApplicationController
 
     def create
         user = Empleado.find_by(usuario: params[:session][:usuario].downcase)
-        if user && user.authenticate(params[:session][:password])
+        if !user
+            flash.now['not_user'] = 'Usuario no existe'
+            render 'new'
+        elsif user.authenticate(params[:session][:password])
             log_in user
-            redirect_to user
+            redirect_to pages_main_path
         else
-            flash.now[:notice] = 'Invalid email/password combination'
+            flash.now['not_pass'] = 'Password incorrecto'
             render 'new'
         end
     end
