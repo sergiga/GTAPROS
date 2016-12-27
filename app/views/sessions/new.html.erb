@@ -1,0 +1,26 @@
+<% provide(:title, "Log in") %>
+
+<div class="fully-centered">
+    <h1 class="login-title">GTAPROS</h1>
+    <div class="card card-login">
+        <%= form_for(:session, url: login_path) do |f| %>
+            <div class="input-wrapper<%= ' login-error' if flash[:'not_user'] %>">
+                <%= f.label :usuario %>
+                <%= f.text_field :usuario, class: 'input-text' %>
+                <span>Usuario incorrecto</span>
+            </div>
+
+            <div class="input-wrapper<%= ' login-error' if flash[:'not_pass'] %>">
+                <%= f.label :password %>
+                <%= f.password_field :password, class: 'input-text' %>
+                <span>Password incorrecto</span>
+            </div>
+
+            <%= f.submit "Log in", class: "btn-material" %>
+
+            <% if flash[:notice] %>
+                <div class="notice"><%= flash[:notice] %></div>
+            <% end %>
+        <% end %>
+    </div>
+</div>
