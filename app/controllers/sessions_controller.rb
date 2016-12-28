@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
             render 'new'
         elsif user.authenticate(params[:session][:password])
             log_in user
-            redirect_to pages_main_path
+            redirect_to empleado_proyectos_path(user)
         else
             flash.now['not_pass'] = 'Password incorrecto'
             render 'new'
