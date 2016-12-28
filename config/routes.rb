@@ -10,4 +10,7 @@ Rails.application.routes.draw do
     end
 
     root 'sessions#new'
+
+  get 'layouts/new_employee'
+    get   '/new_employee', to: 'empleados#new'
 end

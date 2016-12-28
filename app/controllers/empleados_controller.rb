@@ -1,6 +1,6 @@
 class EmpleadosController < ApplicationController
 
-    layout 'login'
+    layout 'layouts/new_employee'
 
     def new
     end
