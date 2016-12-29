@@ -1,14 +1,43 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= full_title(yield(:title)) %></title>
-    <%= csrf_meta_tags %>
+    <head>
+        <title><%= full_title(yield(:title)) %></title>
+        <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    </head>
 
-  <body>
-    <%= yield %>
-  </body>
+    <body>
+        <header class="header-main">
+            <p><%= yield :breadcrum %></p>
+            <div class="header-options">
+                <%= link_to logout_path, method: :delete do %>
+                    <i class="material-icons">power_settings_new</i>
+                <% end %>
+            </div>
+        </header>
+        <div id="nav-side" class="nav-side">
+            <div class="side-logo">GTAPROS</div>
+            <nav>
+                <dl>
+                    <dt>Proyectos</dt>
+                    <dt>Calendario</dt>
+                </dl>
+            </nav>
+            <div class="nav-footer">
+                <p>Grupo 07</p>
+                <ul>
+                    <li>Pablo Carrascal Muñoz</li>
+                    <li>Pablo Garcia Sanz</li>
+                    <li>Sergio Garcia Villanueva</li>
+                    <li>Rodrigo Nuñez Paul</li>
+                </ul>
+            </div>
+        </div>
+        <div class="content">
+            <%= yield %>
+        </div>
+    </body>
 </html>

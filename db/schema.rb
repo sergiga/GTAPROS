@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161226185057) do
+ActiveRecord::Schema.define(version: 20161228205422) do
+
+  create_table "asignacion_proyectos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "empleado_id"
+    t.integer  "proyecto_id"
+    t.integer  "rol"
+    t.float    "participacion", limit: 24
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["empleado_id"], name: "index_asignacion_proyectos_on_empleado_id", using: :btree
+    t.index ["proyecto_id"], name: "index_asignacion_proyectos_on_proyecto_id", using: :btree
+  end
 
   create_table "empleados", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "nombre"
@@ -22,6 +33,14 @@ ActiveRecord::Schema.define(version: 20161226185057) do
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
     t.index ["usuario"], name: "index_empleados_on_usuario", unique: true, using: :btree
+  end
+
+  create_table "proyectos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "nombre"
+    t.datetime "fecha_inicio"
+    t.datetime "fecha_fin"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
 end
