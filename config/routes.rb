@@ -13,4 +13,5 @@ Rails.application.routes.draw do
 
   get 'layouts/new_employee'
     get   '/new_employee', to: 'empleados#new'
+    post  '/new_employee', to: 'empleados#create'
 end

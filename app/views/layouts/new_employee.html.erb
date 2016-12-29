@@ -9,32 +9,7 @@
   </head>
 
   <body>
-    <div class="col-md-4 col-md-offset-4">
-    <H1>Nuevo Empleado</H1>
-    <form>
-    <div class="form-group">
-        <label for="name">Nombre del empleado:</label>
-        <input type="text" class="form-control" id="employee_name">
-    </div>
-        <div class="form-group">
-        <label for="lastname">Apellidos:</label>
-        <input type="text" class="form-control" id="employee_lastname">
-    </div>
-    <div class="form-group">
-        <label for="pwd">Contraseña:</label>
-        <input type="password" class="form-control" id="employee_pwd">
-    </div>
-     <div class="form-group">
-        <label for="category">Categoria:</label>
-        <select class="form-control" id="employee_category">
-            <option>Administrador</option>
-            <option>Desarrollador</option>
-            <option>Jefe De Proyecto</option>
-        </select>
-    </div>
-    <button type="submit" class="btn btn-default">Guardar Empleado</button>
-    </form>
-    </div>
+    <%= yield %>
   </body>
 </html>
 
