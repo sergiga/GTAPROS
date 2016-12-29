@@ -11,7 +11,9 @@ Rails.application.routes.draw do
 
     root 'sessions#new'
 
-  get 'layouts/new_employee'
-    get   '/new_employee', to: 'empleados#new'
-    post  '/new_employee', to: 'empleados#create'
+  get 'empleados' => 'empleados#index'
+    get   '/new', to: 'empleados#new'
+    post  '/new', to: 'empleados#create'
+  resources :empleados
+    
 end

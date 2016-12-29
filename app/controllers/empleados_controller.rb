@@ -1,7 +1,5 @@
 class EmpleadosController < ApplicationController
 
-    layout 'layouts/new_employee'
-
     def new
     end
 
@@ -22,8 +20,11 @@ class EmpleadosController < ApplicationController
           flash[:notice] = "Successfully created..."
        else 
          flash[:notice] = "This user already exists in system"
-        
        end
+    end
+
+    def index
+        render 'index'
     end
 
 end
