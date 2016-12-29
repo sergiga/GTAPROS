@@ -17,13 +17,15 @@ class EmpleadosController < ApplicationController
                usuario: new_employee_info[:username],
                password: new_employee_info[:password],
                categoria: new_employee_info[:category])
-          flash[:notice] = "Successfully created..."
+        #TODO add a success message
        else 
-         flash[:notice] = "This user already exists in system"
+           #TODO add a fail message
+           # "Already exists this employee"
        end
     end
 
     def index
+        @employees = Empleado.all
         render 'index'
     end
 
