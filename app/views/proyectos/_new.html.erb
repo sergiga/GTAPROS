@@ -5,7 +5,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title"><%= title %></h4>
       </div>
-      <%= form_for(:session, url: proyectos_path) do |f| %>
+      <%= form_for(:session, url: proyectos_path, remote: true) do |f| %>
         <div class="modal-body">
           <div class="form-group">
             <%= f.text_field :name, class: "form-control input-lg", placeholder: "Nombre del proyecto" %>

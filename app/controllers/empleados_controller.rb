@@ -4,12 +4,15 @@ class EmpleadosController < ApplicationController
     end
 
     def create
-        employee = Empleado.find_by(
-            nombre: params[:session][:name],
-            apellidos: params[:session][:lastname],
-            usuario: params[:session][:username])
+        @errors = ""
+
+        employee = Empleado.find_by(usuario: params[:session][:username])
         
-       if !employee
+        if employee
+            @errors = "El nombre de usuario ya esta asociado"
+            return
+        else
+           !employee
            new_employee_info = params[:session]
            Empleado.create(
                nombre: new_employee_info[:name],
@@ -17,16 +20,17 @@ class EmpleadosController < ApplicationController
                usuario: new_employee_info[:username],
                password: new_employee_info[:password],
                categoria: new_employee_info[:category])
-        #TODO add a success message
-       else 
-           #TODO add a fail message
-           # "Already exists this employee"
-       end
+            redirect_to empleados_path and return
+        end
+    end
+
+    def delete
+        Empleado.destroy(params[:id])
+        redirect_to empleados_path and return
     end
 
     def index
-        @employees = Empleado.all
-        render 'index'
+        @empleados = Empleado.all
     end
 
 end

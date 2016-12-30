@@ -1,4 +1,8 @@
+<div class="container">
 <H1 class="title">Todos los Proyectos</H1>
+<%= button_to('Crear nuevo proyecto', new_proyecto_url, remote: true, method: :get, :class => 'btn btn-large btn-primary col-md-4 text-center')  %>
+<%= csrf_meta_tags %>
+</div>
 
 <div class="pre-scrollable">
     <div class="table-responsive">
@@ -8,6 +12,7 @@
           <th>Nombre</th>
           <th>Fecha de inicio</th>
           <th>Fecha de final</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -16,11 +21,11 @@
           <td><%= p.nombre%></td>
           <td><%= p.fecha_inicio%></td>
           <td><%= p.fecha_fin%></td>
+          <td><%= button_to "delete", proyectos_path(:id => p.id), :method => :delete, :class => 'btn btn-danger' %>
+          <%= button_to('Añadir Jefe de Proyecto', proyectos_setmanager_path(:id => p.id), remote: true, method: :get, :class => 'btn btn-info', ) %></td>
         </tr>  
       <tbody>
     <% end %>
     </table>
   </div>
 </div>
-
-<%= button_to('Crear nuevo proyecto', new_proyecto_url, remote: true, method: :get, :class => 'btn btn-large btn-primary col-md-4 text-center')  %>
