@@ -1,0 +1,2 @@
+class TipoTareaPersonal < ApplicationRecord
+end
