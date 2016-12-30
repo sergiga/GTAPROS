@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-    get 'proyectos/index'
-
     get    '/login',   to: 'sessions#new'
     post   '/login',   to: 'sessions#create'
     delete '/logout',  to: 'sessions#destroy'
@@ -14,6 +12,13 @@ Rails.application.routes.draw do
   get 'empleados' => 'empleados#index'
     get   '/new', to: 'empleados#new'
     post  '/new', to: 'empleados#create'
-  resources :empleados
-    
+
+  get 'proyectos' => 'proyectos#all'
+    get   'proyectos/new'
+    post  'proyectos/new', to: 'proyectos#create'
+    get   'proyectos/all', to: 'proyectos#all'
+    get   'proyectos/setmanager', to: 'proyectos#setmanager'
+    post  'proyectos/setmanager', to: 'proyectos#setmanagerforproject'
+
+  resources :proyectos
 end
