@@ -1,0 +1,18 @@
+  <div class="span8">
+    <H1 class="text-center"s>Asignar Jefe de Proyect a Proyecto</H1>
+    <%= form_for(:session, url: proyectos_setmanager_path, :remote => true) do |f| %>
+    <div class="col-md-6 col-md-offset-3 form-group input-wrapper<%= ' login-error' if flash[:'incorrect_project'] %>">
+        <%= f.label :username %>
+        <%= f.text_field :username, :required => true, class: 'input-text' %>
+    </div>
+        <div class="col-md-6 col-md-offset-3 form-group input-wrapper<%= ' login-error' if flash[:'incorrect_date'] %>">
+        <%= f.label :project_id %>
+        <%= f.text_field :project_id,:required => true, class: 'input-text' %>
+    </div>
+    <%= f.submit "Asignar Proyecto", class: "col-md-6 col-md-offset-3 btn-material"%>
+
+    <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
+    <% end %>
+  </div>
