@@ -10,4 +10,10 @@ Rails.application.routes.draw do
     end
 
     root 'sessions#new'
+
+  get 'empleados' => 'empleados#index'
+    get   '/new', to: 'empleados#new'
+    post  '/new', to: 'empleados#create'
+  resources :empleados
+    
 end

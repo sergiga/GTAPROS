@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161228205422) do
+ActiveRecord::Schema.define(version: 20161229233727) do
+
+  create_table "actividads", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "nombre"
+    t.string   "descripcion"
+    t.float    "esfuerzo",    limit: 24
+    t.integer  "rol"
+    t.boolean  "finalizado"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "proyecto_id"
+    t.string   "anteriores"
+    t.index ["proyecto_id"], name: "index_actividads_on_proyecto_id", using: :btree
+  end
 
   create_table "asignacion_proyectos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "empleado_id"
@@ -21,6 +36,13 @@ ActiveRecord::Schema.define(version: 20161228205422) do
     t.datetime "updated_at",               null: false
     t.index ["empleado_id"], name: "index_asignacion_proyectos_on_empleado_id", using: :btree
     t.index ["proyecto_id"], name: "index_asignacion_proyectos_on_proyecto_id", using: :btree
+  end
+
+  create_table "categoria_empleados", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "nivel"
+    t.string   "categoria"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "empleados", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -35,6 +57,21 @@ ActiveRecord::Schema.define(version: 20161228205422) do
     t.index ["usuario"], name: "index_empleados_on_usuario", unique: true, using: :btree
   end
 
+  create_table "estado_tarea_personals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "estado"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "periodo_vacacionals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "empleado_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["empleado_id"], name: "index_periodo_vacacionals_on_empleado_id", using: :btree
+  end
+
   create_table "proyectos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "nombre"
     t.datetime "fecha_inicio"
@@ -43,4 +80,25 @@ ActiveRecord::Schema.define(version: 20161228205422) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "tarea_personals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "empleado_id"
+    t.integer  "actividad_id"
+    t.integer  "tipo"
+    t.string   "descripcion"
+    t.integer  "estado"
+    t.time     "tiempo_estimado"
+    t.time     "tiempo_final"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["actividad_id"], name: "index_tarea_personals_on_actividad_id", using: :btree
+    t.index ["empleado_id"], name: "index_tarea_personals_on_empleado_id", using: :btree
+  end
+
+  create_table "tipo_tarea_personals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "tipo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "actividads", "proyectos"
 end
