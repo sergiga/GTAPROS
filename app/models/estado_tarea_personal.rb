@@ -1,0 +1,2 @@
+class EstadoTareaPersonal < ApplicationRecord
+end

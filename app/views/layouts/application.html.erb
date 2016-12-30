@@ -22,8 +22,15 @@
             <div class="side-logo">GTAPROS</div>
             <nav>
                 <dl>
-                    <dt>Proyectos</dt>
-                    <dt>Calendario</dt>
+                    <% if current_user.categoria == 0 %>
+                        <dt>Empleados</dt>
+                        <dt>Nuevo proyecto</dt>
+                        <dt>Asignar responsable proyecto</dt>
+                        <dt>Cargar datos iniciales</dt>
+                    <% else %>
+                        <dt>Proyectos</dt>
+                        <dt>Calendario</dt>
+                    <% end %>
                 </dl>
             </nav>
             <div class="nav-footer">
