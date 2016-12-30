@@ -21,17 +21,15 @@
         <div id="nav-side" class="nav-side">
             <div class="side-logo">GTAPROS</div>
             <nav>
-                <dl>
+                <ul>
                     <% if current_user.categoria == 0 %>
-                        <dt>Empleados</dt>
-                        <dt>Nuevo proyecto</dt>
-                        <dt>Asignar responsable proyecto</dt>
-                        <dt>Cargar datos iniciales</dt>
+                        <li><%= link_to "Proyectos", proyectos_index_path %></li>
+                        <li><%= link_to "Empleados", empleados_path %></li>
                     <% else %>
-                        <dt>Proyectos</dt>
-                        <dt>Calendario</dt>
+                        <li><%= link_to "Proyectos", empleado_proyectos_path(current_user) %></li>
                     <% end %>
-                </dl>
+                    <li><%= link_to "Calendario", "#" %></li>
+                </ul>
             </nav>
             <div class="nav-footer">
                 <p>Grupo 07</p>
