@@ -1,0 +1,21 @@
+<%= provide :breadcrum, @proyecto.nombre + " - EMPLEADO" %>
+
+<h1>Nueva Asignacion de Empleado</h1>
+
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
+<%= form_for([@proyecto, @asignacion]) do |f| %>
+  <%= hidden_field_tag(:proyecto_id, @proyecto.id) %>
+  <div class="form-group">
+    <%= f.collection_select(:empleado_id, Empleado.asignables(@proyecto), :id, :full_name, {:prompt => 'Selecciona al empleado'}) %>
+  </div>
+  <div class="form-group">
+    <%= f.collection_select(:rol, CategoriaEmpleado.all.where("nivel > ?", 1), :id, :categoria, {:prompt => 'Selecciona su rol en el proyecto'}) %>
+  </div>
+  <div class="form-group">
+    <%= f.number_field(:participacion, class: "form-control input-lg",in: 1..100, step: 1, placeholder: "Porcentaje particiapcion") %>
+  </div>
+  <%= f.submit "Crear actividad", class: "btn btn-primary"%>
+<% end %>

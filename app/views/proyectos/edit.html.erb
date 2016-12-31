@@ -1,6 +1,16 @@
 <%= provide :breadcrum, "PROYECTO - " + @proyecto.nombre.upcase %>
 
 <h1>Trabajadores</h1>
+<div id="trabajadores">
+  <div class="row">
+    <div class="col-xs-3 table-row text-left">Nombre</div>
+    <div class="col-xs-3 table-row text-left">Apellidos</div>
+    <div class="col-xs-3 table-row text-left">Participacion</div>
+  </div>
+  <%= render @proyecto.asignacion_proyectos %>
+  <%= link_to "Add empleado", new_proyecto_asignacion_proyecto_path(@proyecto), class: "btn btn-primary" %>
+</div>
+
 <h1>Actividades</h1>
 <div id="actividades">
   <div class="row">

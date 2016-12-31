@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
   resources :proyectos, only: [:show, :edit, :update, :destroy, :create] do
     resources :actividads
+    resources :asignacion_proyectos, only: [:new, :create]
   end
 
   get 'proyectos' => 'proyectos#all'

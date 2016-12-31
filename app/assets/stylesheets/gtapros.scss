@@ -283,13 +283,15 @@ input:-webkit-autofill {
 
 /*        PROYECTOS       */
 
-#actividades .table-row {
+#actividades .table-row,
+#trabajadores .table-row {
   height: 37px;
   padding-top: 8px;
   padding-bottom: 8px;
   border-bottom: 1px solid #e0e0e0;
 }
 
-#actividades .btn {
+#actividades .btn,
+#trabajadores .btn {
   margin-top: 12px;
 }
