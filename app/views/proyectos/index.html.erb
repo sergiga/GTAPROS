@@ -1,0 +1,29 @@
+<%= provide :breadcrum, @user.nombre.upcase + " - PROYECTOS" %>
+
+<% if @proyectos.empty? %>
+  <div class="fully-centered empty-content">No tiene ningun proyecto</div>
+<% else %>
+  <div class="row">
+    <% @proyectos.each do |p|%>
+      <div class="col-xs-4">
+          <div class="card">
+          <div class="proy-header"><%= p.proyecto.nombre %></div>
+          <div class="proy-content">
+            <div><%= CategoriaEmpleado.find_by(nivel: p.rol).categoria %></div>
+            <div>Estado: <%= p.proyecto.finalizado ? "Finalizado" : "En curso" %></div>
+            <div>Comienzo: <%= p.proyecto.fecha_inicio %></div>
+            <% if p.proyecto.finalizado %>
+              <div>Fin: <%= p.proyecto.fecha_fin %> </div>
+            <% end %>
+          </div>
+          <div class="proy-actions">
+            <%= link_to "VER", empleado_proyecto_path(current_user, p) %>
+            <% if CategoriaEmpleado.find_by(nivel: p.rol) != 1 %>
+              <%= link_to "EDITAR", edit_proyecto_path(p) %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

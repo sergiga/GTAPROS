@@ -1,4 +1,9 @@
 class Actividad < ApplicationRecord
     has_many :tarea_personals
-    has_many :proyectos
+    belongs_to :proyecto
+
+    validates :nombre, presence: true
+    validates :descripcion, presence: true
+    validates :esfuerzo, presence: true
+    validates :rol, presence: true
 end

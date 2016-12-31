@@ -1,9 +1,14 @@
 require 'time'
 require 'date'
 class ProyectosController < ApplicationController
-  
+
   def index
-    @proyectos = Proyecto.all
+    @user = current_user
+    if !@user
+      @proyectos = Proyecto.all
+    else
+      @proyectos = @user.asignacion_proyectos.includes(:proyecto)
+    end
   end
 
   def new
@@ -18,13 +23,13 @@ class ProyectosController < ApplicationController
     projParams = params[:session]
     @errors = ""
 
-    start_date = projParams[:startDate] 
+    start_date = projParams[:startDate]
 
     begin
     DateTime.parse start_date
-    rescue 
-      @errors = 'Fecha incorrecta' 
-      return 
+    rescue
+      @errors = 'Fecha incorrecta'
+      return
     end
 
     if (DateTime.parse start_date) < DateTime.now.to_date
@@ -65,19 +70,21 @@ class ProyectosController < ApplicationController
     elsif manager.categoria != 1
       @errors = "el empleado no tiene categoría suficiente para ser jefe de proyecto"
       return
-    end 
+    end
 
-    projects_assigned_to_manager = AsignacionProyecto.joins(:proyecto).where(empleado_id: manager.id, rol: 1).
-                                                  where("fecha_inicio < ?", DateTime.now.to_date).
-                                                  where("fecha_fin > ?", DateTime.now.to_date)
-                                              
-    if !projects_assigned_to_manager
-      puts "se crea"
+    manager_projects = manager.asignacion_proyectos.joins(:proyecto).where(rol: 1).where("finalizado = ?", false).count
+
+    if manager_projects == 0
       proyecto = Proyecto.find_by(id: project_id)
-      AsignacionProyecto.create(empleado_id: manager.id, proyecto_id: project_id, rol: 1, participacion: 35)
+      AsignacionProyecto.create(empleado_id: manager.id, proyecto_id: project_id, rol: 1, participacion: 0)
       redirect_to proyectos_path and return
     else
-      @errors = "ya es jefe de proyecto de otro proyecto"
+      @errors = "ya es jefe de proyecto en otro proyecto actualmente"
+      return
     end
+  end
+
+  def edit
+    @proyecto = Proyecto.find(params[:id])
   end
 end

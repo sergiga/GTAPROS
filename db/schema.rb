@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161229233727) do
+ActiveRecord::Schema.define(version: 20161230181155) do
 
   create_table "actividads", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "nombre"
@@ -76,8 +76,9 @@ ActiveRecord::Schema.define(version: 20161229233727) do
     t.string   "nombre"
     t.datetime "fecha_inicio"
     t.datetime "fecha_fin"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "finalizado",   default: false
   end
 
   create_table "tarea_personals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
