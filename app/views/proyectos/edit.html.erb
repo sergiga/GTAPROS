@@ -22,4 +22,14 @@
   </div>
   <%= render @proyecto.actividads %>
   <%= link_to "Add actividad", new_proyecto_actividad_path(@proyecto), class: "btn btn-primary" %>
+
+<% if @proyecto.empleados.count > 1 && @proyecto.actividads.count > 0 %>
+<h1>Comenzar proyecto</h1>
+  <%= form_for(:proyecto, url: proyectos_init_path(@proyecto), method: :put) do |f| %>
+    <div class="form-group">
+      <%= f.date_field(:fecha_inicio) %>
+    </div>
+    <%= f.submit "Iniciar proyecto", class: "btn btn-primary"%>
+  <% end %>
+<% end %>
 </div>

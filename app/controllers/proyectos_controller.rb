@@ -65,7 +65,7 @@ class ProyectosController < ApplicationController
     manager = Empleado.find_by(usuario: manager_username)
 
     if !manager
-      @errors = "el unuario no existe"
+      @errors = "el usuario no existe"
       return
     elsif manager.categoria != 1
       @errors = "el empleado no tiene categoría suficiente para ser jefe de proyecto"
@@ -86,5 +86,18 @@ class ProyectosController < ApplicationController
 
   def edit
     @proyecto = Proyecto.find(params[:id])
+  end
+
+  def init
+    @proyecto = Proyecto.find(params[:id])
+    @proyecto.iniciar_proyecto(params[:proyecto][:fecha_inicio].to_time)
+
+    end_time = @proyecto.actividads.order(end_time: :desc).first.end_time
+
+    @proyecto.update(
+        fecha_inicio: params[:proyecto][:fecha_inicio].to_time,
+        fecha_fin: end_time
+    )
+    redirect_to empleado_proyectos_path(Empleado.find_by(id: session[:user_id]))
   end
 end

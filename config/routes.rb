@@ -21,5 +21,6 @@ Rails.application.routes.draw do
   get   'proyectos/setmanager', to: 'proyectos#setmanager'
   post  'proyectos/setmanager', to: 'proyectos#setmanagerforproject'
   delete '/proyectos', to: 'proyectos#delete'
+  put 'proyectos/:id/init', to: 'proyectos#init', as: 'proyectos_init'
   resources :proyectos
 end

@@ -8,13 +8,13 @@ class ActividadsController < ApplicationController
     @proyecto = Proyecto.find(params[:proyecto_id])
     @actividad = Actividad.new(actividad_params)
     valid = true
-    predecesoras = actividad_params[:anteriores].split('/\s*[,;]\s*')
+    predecesoras = actividad_params[:anteriores].split(/\s*,\s*/)
     predecesoras.each do |p|
       if !p.empty? && @proyecto.actividads.find_by(nombre: p).nil?
         valid = false
       end
     end
-    valid = false unless @proyecto.actividads.find_by(nombre: actividad_params[:anteriores])
+    valid = false if @proyecto.actividads.find_by(nombre: actividad_params[:nombre])
 
     @actividad.proyecto_id = params[:proyecto_id]
     @actividad.save if valid
