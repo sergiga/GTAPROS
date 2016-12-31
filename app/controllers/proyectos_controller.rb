@@ -100,4 +100,10 @@ class ProyectosController < ApplicationController
     )
     redirect_to empleado_proyectos_path(Empleado.find_by(id: session[:user_id]))
   end
+
+  def show
+    @proyecto = Proyecto.find(params[:id])
+    @asignacion = AsignacionProyecto.where(empleado_id: current_user.id)
+        .where(proyecto_id: @proyecto.id).first
+  end
 end

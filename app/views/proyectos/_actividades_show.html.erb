@@ -1,0 +1,16 @@
+<% actividades.each do |actividad| %>
+  <div class="row">
+    <div class="col-xs-1 table-row text-left"><%= actividad.nombre %></div>
+    <div class="col-xs-2 table-row text-left"><%= actividad.descripcion %></div>
+    <div class="col-xs-2 table-row text-left"><%= actividad.anteriores%></div>
+    <div class="col-xs-3 table-row text-left"><%= actividad.start_time %></div>
+    <div class="col-xs-3 table-row text-left"><%= actividad.end_time %></div>
+    <div class="col-xs-1 table-row text-left">
+      <% if asignacion.rol == 1 %>
+        <%= link_to "#" do %>
+            <i class="material-icons">person_add</i>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
