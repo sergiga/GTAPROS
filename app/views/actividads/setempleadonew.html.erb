@@ -1,0 +1,9 @@
+<%= provide :breadcrum, "ACTIVIDAD - " + @actividad.nombre %>
+
+<h1>Asignar Empleado</h1>
+<%= form_for(:asignacion, url: create_actividad_setempleado_path(@actividad.id)) do |f| %>
+  <div class="form-group">
+    <%= f.collection_select(:empleado_id, @empleados, :id, :full_name, class: "form-control") %>
+  </div>
+  <%= f.submit "Asignar", class: "btn btn-primary"%>
+<% end %>
