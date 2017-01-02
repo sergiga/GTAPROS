@@ -1,0 +1,35 @@
+<%= provide :breadcrum, "PROYECTO - " + @proyecto.nombre.upcase %>
+
+<h1>Trabajadores</h1>
+<div id="trabajadores">
+  <div class="row">
+    <div class="col-xs-3 table-row text-left">Nombre</div>
+    <div class="col-xs-3 table-row text-left">Apellidos</div>
+    <div class="col-xs-3 table-row text-left">Participacion</div>
+  </div>
+  <%= render @proyecto.asignacion_proyectos %>
+  <%= link_to "Add empleado", new_proyecto_asignacion_proyecto_path(@proyecto), class: "btn btn-primary" %>
+</div>
+
+<h1>Actividades</h1>
+<div id="actividades">
+  <div class="row">
+    <div class="col-xs-2 table-row text-left">ID</div>
+    <div class="col-xs-4 table-row text-left">Descripcion</div>
+    <div class="col-xs-2 table-row text-left">Rol</div>
+    <div class="col-xs-2 table-row text-left">Predesoras</div>
+    <div class="col-xs-2 table-row text-left">Esfuerzo</div>
+  </div>
+  <%= render @proyecto.actividads %>
+  <%= link_to "Add actividad", new_proyecto_actividad_path(@proyecto), class: "btn btn-primary" %>
+
+<% if @proyecto.empleados.count > 1 && @proyecto.actividads.count > 0 %>
+<h1>Comenzar proyecto</h1>
+  <%= form_for(:proyecto, url: proyectos_init_path(@proyecto), method: :put) do |f| %>
+    <div class="form-group">
+      <%= f.date_field(:fecha_inicio) %>
+    </div>
+    <%= f.submit "Iniciar proyecto", class: "btn btn-primary"%>
+  <% end %>
+<% end %>
+</div>

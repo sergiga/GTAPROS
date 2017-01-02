@@ -10,21 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161229233727) do
+ActiveRecord::Schema.define(version: 20170101220945) do
 
   create_table "actividads", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "nombre"
     t.string   "descripcion"
-    t.float    "esfuerzo",    limit: 24
+    t.float    "esfuerzo",      limit: 24
     t.integer  "rol"
     t.boolean  "finalizado"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.integer  "proyecto_id"
     t.string   "anteriores"
+    t.float    "participacion", limit: 24, default: 0.0
     t.index ["proyecto_id"], name: "index_actividads_on_proyecto_id", using: :btree
+  end
+
+  create_table "asignacion_actividads", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "empleado_id"
+    t.integer  "actividad_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["actividad_id"], name: "index_asignacion_actividads_on_actividad_id", using: :btree
+    t.index ["empleado_id"], name: "index_asignacion_actividads_on_empleado_id", using: :btree
   end
 
   create_table "asignacion_proyectos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -76,8 +86,9 @@ ActiveRecord::Schema.define(version: 20161229233727) do
     t.string   "nombre"
     t.datetime "fecha_inicio"
     t.datetime "fecha_fin"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "finalizado",   default: false
   end
 
   create_table "tarea_personals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

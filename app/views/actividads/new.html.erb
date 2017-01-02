@@ -1,0 +1,35 @@
+<%= provide :breadcrum, @proyecto.nombre + " - NUEVA ACTIVIDAD" %>
+
+<h1>Nueva Actividad</h1>
+
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
+<%= form_for([@proyecto, @actividad]) do |f| %>
+  <div class="form-group">
+    <%= f.text_field :nombre, class: "form-control input-lg", placeholder: "Nombre" %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :descripcion, class: "form-control input-lg", placeholder: "Descripcion" %>
+  </div>
+  <div class="form-group">
+    <%= f.number_field(:esfuerzo, class: "form-control input-lg", step: 1, placeholder: "Esfuerzo") %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :anteriores, class: "form-control input-lg", placeholder: "Predecesoras (nombre, nombre, ...)" %>
+  </div>
+  <div class="form-group">
+    <%= f.select(:rol, options_for_select(
+      [
+        ['Analista', 2],
+        ['Diseniador', 3],
+        ['Analista Programador', 4],
+        ['Responsable Pruebas', 5],
+        ['Programador', 6],
+        ['Probador', 7]
+      ]
+    ), placeholder: "Rol") %>
+  </div>
+  <%= f.submit "Crear actividad", class: "btn btn-primary"%>
+<% end %>

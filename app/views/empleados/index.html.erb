@@ -1,3 +1,32 @@
 <%= provide :breadcrum, "EMPLEADOS" %>
+<div class="container">
+<H1 class="title">Todos los Empleados</H1>
+<%= button_to('Guardar nuevo Empleado', new_empleado_url, remote: true, method: :get, :class => 'btn btn-large btn-primary col-md-4 text-center')  %>
+</div>
 
-<div class="fully-centered empty-content">No tiene ningun Empleado</div>
+<div class="pre-scrollable">
+    <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellidos</th>
+          <th>Usuario</th>
+          <th>Categoria</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @empleados.each do |e|%>
+        <tr class="active">
+          <td><%= e.nombre%></td>
+          <td><%= e.apellidos%></td>
+          <td><%= e.usuario%></td>
+          <td><%= e.categoria%></td>
+          <td><%= button_to "delete", empleados_path(:id => e.id), :method => :delete, :class => 'btn btn-danger' %></td>
+        </tr>  
+      <tbody>
+    <% end %>
+    </table>
+  </div>
+</div>
