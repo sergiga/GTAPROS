@@ -37,18 +37,19 @@ class Actividad < ApplicationRecord
     self.start_time = latest_start
     self.end_time = (esfuerzo/participacion_total).to_i.business_hour.after(self.start_time)
 
+    debugger
+
     update(
       start_time: self.start_time,
       end_time: self.end_time,
-      participacion: participacion_total
+      participacion: self.participacion
     )
-    
+
     actividades.each do |a|
       if a.is_child_of(nombre)
         a.recalcular_tiempo(0, actividades)
       end
     end
-    debugger
   end
 
   def is_child_of(nombre_padre)

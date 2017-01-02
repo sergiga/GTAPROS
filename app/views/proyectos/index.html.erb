@@ -17,9 +17,9 @@
             <% end %>
           </div>
           <div class="proy-actions">
-            <%= link_to "VER", empleado_proyecto_path(current_user, p) %>
+            <%= link_to "VER", empleado_proyecto_path(current_user, p.proyecto_id) %>
             <% if CategoriaEmpleado.find_by(nivel: p.rol) != 1 && p.proyecto.fecha_fin.nil?%>
-              <%= link_to "EDITAR", edit_proyecto_path(p) %>
+              <%= link_to "EDITAR", edit_proyecto_path(p.proyecto_id) %>
             <% end %>
           </div>
         </div>
