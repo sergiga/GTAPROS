@@ -13,11 +13,13 @@ Rails.application.routes.draw do
   resources :proyectos, only: [:new, :create]
   get   'proyectos/setmanager', to: 'proyectos#setmanager'
   post  'proyectos/setmanager', to: 'proyectos#setmanagerforproject'
+  put 'proyectos/:id/init', to: 'proyectos#init', as: 'proyectos_init'
+
   resources :proyectos, only: [:show, :edit, :update, :destroy] do
     resources :actividads, only: [:new, :create]
     resources :asignacion_proyectos, only: [:new, :create]
   end
-  
+
   resources :actividads, only: [:show]
   get 'actividads/:id/setempleado', to: 'actividads#setempleadonew', as: 'new_actividad_setempleado'
   post 'actividads/:id/setempleado', to: 'actividads#setempleadocreate', as: 'create_actividad_setempleado'

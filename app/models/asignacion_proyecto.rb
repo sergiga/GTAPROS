@@ -7,7 +7,7 @@ class AsignacionProyecto < ApplicationRecord
     validates :rol, presence: true
 
     def rol_no_puede_ser_mayor
-      if empleado.categoria < rol
+      if empleado.categoria > rol
         errors.add(:rol, "no puede ser mayor")
       end
     end
