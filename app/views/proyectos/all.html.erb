@@ -23,7 +23,7 @@
           <td><%= p.fecha_fin%></td>
           <td><%= button_to "delete", proyectos_path(:id => p.id), :method => :delete, :class => 'btn btn-danger' %>
           <%= button_to('Añadir Jefe de Proyecto', proyectos_setmanager_path(:id => p.id), remote: true, method: :get, :class => 'btn btn-info', ) %></td>
-        </tr>  
+        </tr>
       <tbody>
     <% end %>
     </table>
