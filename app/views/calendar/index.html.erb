@@ -1,0 +1,17 @@
+<%= provide :breadcrum, "CALENDARIO" %>
+<div id="empleado_id" data-empleado="<%= params[:id] %>"></div>
+<div id="calendar"></div>
+<h1>Pedir vacaciones</h1>
+<% flash.each do |key, msg| %>
+  <div class="flash_error_msg"><%= msg %></div>
+<% end %>
+<%= form_for(:vacaciones, url: pedir_vacaciones_path(current_user)) do |f| %>
+  <div class="form-group">
+    <%= f.date_field(:start_time, class: "form-control") %>
+  </div>
+  <div class="form-group">
+      <%= f.label :semanas %>
+      <%= f.number_field(:semanas, in: 1..4, step: 1, class: "form-control") %>
+  </div>
+  <%= f.submit "Pedir vacaciones", class: "btn btn-primary"%>
+<% end %>

@@ -58,4 +58,12 @@ class Actividad < ApplicationRecord
     end
     false
   end
+
+  def as_json(options = {})
+    {
+    title: "#{self.proyecto.nombre} - #{self.nombre}",
+    start: self.start_time,
+    end: self.end_time
+    }
+  end
 end
