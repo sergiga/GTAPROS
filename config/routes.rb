@@ -24,7 +24,8 @@ Rails.application.routes.draw do
   resources :actividads, only: [:show]
   get 'actividads/:id/setempleado', to: 'actividads#setempleadonew', as: 'new_actividad_setempleado'
   post 'actividads/:id/setempleado', to: 'actividads#setempleadocreate', as: 'create_actividad_setempleado'
-
+  
+  delete 'proyectos' => 'proyectos#delete'
   get 'proyectos' => 'proyectos#all'
 #  get   'proyectos/new'
 #  post  'proyectos/new', to: 'proyectos#create'
