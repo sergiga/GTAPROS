@@ -34,10 +34,11 @@ class Actividad < ApplicationRecord
 
     participacion_total = self.participacion == 0 ? 1.0 : self.participacion
 
+    puts esfuerzo
+    puts participacion_total
     self.start_time = latest_start
     self.end_time = (esfuerzo/participacion_total).to_i.business_hour.after(self.start_time)
 
-    debugger
 
     update(
       start_time: self.start_time,
