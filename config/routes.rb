@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   resources :empleados do
       resources :proyectos, only: [:index, :show]
   end
-
+  delete '/empleados', to: 'empleados#delete'
+  
   resources :proyectos, only: [:new, :create]
   get   'proyectos/setmanager', to: 'proyectos#setmanager'
   post  'proyectos/setmanager', to: 'proyectos#setmanagerforproject'
