@@ -11,6 +11,11 @@
             <i class="material-icons">person_add</i>
         <% end %>
       <% end %>
+      <% if actividad.asignacion_actividads.where(empleado_id: current_user.id).count > 0 %>
+        <%= link_to proyecto_actividad_path(actividad.proyecto, actividad) do %>
+            <i class="material-icons">visibility</i>
+        <% end %>
+      <% end %>
     </div>
   </div>
 <% end %>

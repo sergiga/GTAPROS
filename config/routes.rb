@@ -16,11 +16,13 @@ Rails.application.routes.draw do
   put 'proyectos/:id/init', to: 'proyectos#init', as: 'proyectos_init'
 
   resources :proyectos, only: [:show, :edit, :update, :destroy] do
-    resources :actividads, only: [:new, :create]
+    resources :actividads, only: [:new, :create, :show]
     resources :asignacion_proyectos, only: [:new, :create]
   end
 
-  resources :actividads, only: [:show]
+  resources :actividads, only: [:show] do
+    resources :tarea_personals
+  end
   get 'actividads/:id/setempleado', to: 'actividads#setempleadonew', as: 'new_actividad_setempleado'
   post 'actividads/:id/setempleado', to: 'actividads#setempleadocreate', as: 'create_actividad_setempleado'
 

@@ -64,6 +64,11 @@ class ActividadsController < ApplicationController
     redirect_to empleado_proyecto_path(current_user, @actividad.proyecto)
   end
 
+  def show
+    @actividad = Actividad.find(params[:id])
+    @tareas = TareaPersonal.where(:actividad_id => @actividad.id)
+  end
+
   # Para evitar inyeccion de scripts maliciosos en los formularios
   def asignacion_params
     params.require(:asignacion).permit(:empleado_id)

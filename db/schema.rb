@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170101220945) do
+ActiveRecord::Schema.define(version: 20170104161414) do
 
   create_table "actividads", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "nombre"
@@ -96,11 +96,10 @@ ActiveRecord::Schema.define(version: 20170101220945) do
     t.integer  "actividad_id"
     t.integer  "tipo"
     t.string   "descripcion"
-    t.integer  "estado"
-    t.time     "tiempo_estimado"
-    t.time     "tiempo_final"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "estado",                  default: 2
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.float    "duracion",     limit: 24
     t.index ["actividad_id"], name: "index_tarea_personals_on_actividad_id", using: :btree
     t.index ["empleado_id"], name: "index_tarea_personals_on_empleado_id", using: :btree
   end

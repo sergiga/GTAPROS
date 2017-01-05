@@ -42,6 +42,7 @@ GEM
     autoprefixer-rails (6.6.0)
       execjs
     bcrypt (3.1.11)
+    bcrypt (3.1.11-x86-mingw32)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -62,6 +63,7 @@ GEM
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.14)
+    ffi (1.9.14-x86-mingw32)
     fullcalendar-rails (3.1.0.0)
       jquery-rails (>= 4.0.5, < 5.0.0)
       jquery-ui-rails (>= 5.0.2)
@@ -95,8 +97,11 @@ GEM
       railties (>= 3.1)
     multi_json (1.12.1)
     mysql2 (0.4.5)
+    mysql2 (0.4.5-x86-mingw32)
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
+      mini_portile2 (~> 2.1.0)
+    nokogiri (1.6.8.1-x86-mingw32)
       mini_portile2 (~> 2.1.0)
     puma (3.6.2)
     rack (2.0.1)
@@ -156,6 +161,8 @@ GEM
     turbolinks-source (5.0.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2016.10)
+      tzinfo (>= 1.0.0)
     uglifier (3.0.4)
       execjs (>= 0.3.0, < 3)
     web-console (3.4.0)
@@ -169,6 +176,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   bcrypt (= 3.1.11)

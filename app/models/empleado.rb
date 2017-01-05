@@ -2,6 +2,7 @@ class Empleado < ApplicationRecord
     has_many :asignacion_proyectos
     has_many :asignacion_actividads
     has_many :periodo_vacacionals
+    has_many :tarea_personals
     has_many :proyectos, through: :asignacion_proyectos
     has_many :actividads, through: :asignacion_actividads
 

@@ -1,0 +1,14 @@
+<h1> Nueva tarea personal </h1>
+      <%= form_for(:tarea, url: actividad_tarea_personals_path(params[:actividad_id])) do |f| %>
+          <div class="form-group">
+            <%= f.collection_select(:tipo, TipoTareaPersonal.all, :id, :tipo, {:prompt => 'Selecciona el tipo de tarea'}) %>
+          </div>
+          <div class="form-group">
+            <%= f.number_field :duracion, class: "form-control input-lg", placeholder: "Duracion (horas)" %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :descripcion, class: "form-control input-lg", placeholder: "Descripcion" %>
+          </div>
+          <%= f.submit "Añadir tarea personal", class: "btn btn-primary btn-lg btn-block" %>
+        
+      <% end %>
