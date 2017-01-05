@@ -10,6 +10,7 @@ class Empleado < ApplicationRecord
     has_secure_password
     validates :password, presence: true
 
+    # Devuelve los empleados asignables a un proyecto
     def self.asignables(proyecto)
       asignables = []
       Empleado.all.each do |e|
@@ -28,6 +29,8 @@ class Empleado < ApplicationRecord
       asignables
     end
 
+    # Devuelve los empleados capaces de realizar la actividad pasada
+    # por argumentos
     def self.find_candidatos_asignacion(actividad)
       candidatos = []
 
@@ -62,6 +65,8 @@ class Empleado < ApplicationRecord
       candidatos
     end
 
+    # Devuelve el nombre completo del empleado, sobre todo es usado por
+    # las vistas
     def full_name
       "#{nombre} #{apellidos}"
     end
