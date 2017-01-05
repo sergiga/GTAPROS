@@ -12,6 +12,29 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require moment
+//= require fullcalendar
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(document).on('turbolinks:load', function() {
+  let user_id = $('#empleado_id').data('empleado')
+
+  $('#calendar').fullCalendar({
+    height: 650,
+
+    eventSources: [
+      {
+        url: `/calendar/${user_id}/actividades`,
+        type: 'GET'
+      },
+
+      {
+        url: `/calendar/${user_id}/vacaciones`,
+        type: 'GET',
+        backgroundColor: '#00897B'
+      }
+    ]
+  })
+});

@@ -1,0 +1,23 @@
+ <%= provide :breadcrum, "ACTIVIDAD - "  + @actividad.nombre %> 
+
+<h1>Tareas personales</h1>
+
+ <div class="row">
+    <div class="col-xs-3">Descripcion</div>
+    <div class="col-xs-3 text-right">Duracion en horas</div>
+    </div>
+<% @tareas.each do |t| %>
+
+ <div class="row">
+ <div class="col">
+    <div class="col-xs-3 text-"><%= t.descripcion %></div>
+    </div>
+    <div class="col">
+    <div class="col-xs-3 text-right"><%= t.duracion %></div>
+    </div>
+  </div>
+
+  <% end  %>
+
+  <%= link_to "Añadir tarea personal", new_actividad_tarea_personal_path(@actividad.id) , class: "btn btn-primary btn-lg btn-block"%></td>
+  </div>

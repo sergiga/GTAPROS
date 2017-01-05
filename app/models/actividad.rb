@@ -9,6 +9,9 @@ class Actividad < ApplicationRecord
   validates :esfuerzo, presence: true
   validates :rol, presence: true
 
+  # Calcula la duracion de la actividad y recursivamente la de sus hijas, este
+  # metodo solo funciona cuando no se sabe aun la duracion de la actividad, es
+  # decir, cuando se calcula por primera vez
   def calcular_tiempo(actividades, fecha_inicio)
     if self.start_time.nil? || self.end_time.nil? || self.start_time < fecha_inicio.ctime
       self.start_time = 0.business_hour.after(fecha_inicio)
@@ -22,6 +25,9 @@ class Actividad < ApplicationRecord
     update(start_time: self.start_time, end_time: self.end_time)
   end
 
+  # Recalcula la duracion de la actividad y recursivamente la de sus hijas
+  # cuando se asigna un nuevo trabajador a la actividad y por ello cambia la
+  # duracion de la actividad
   def recalcular_tiempo(e_participacion, actividades)
     latest_start = self.proyecto.fecha_inicio
     self.participacion += (e_participacion / 100)
@@ -34,10 +40,11 @@ class Actividad < ApplicationRecord
 
     participacion_total = self.participacion == 0 ? 1.0 : self.participacion
 
+    puts esfuerzo
+    puts participacion_total
     self.start_time = latest_start
     self.end_time = (esfuerzo/participacion_total).to_i.business_hour.after(self.start_time)
 
-    debugger
 
     update(
       start_time: self.start_time,
@@ -52,10 +59,22 @@ class Actividad < ApplicationRecord
     end
   end
 
+  # Devuelve true si la actividad es hija del padre especificado en los
+  # argumentos
   def is_child_of(nombre_padre)
     anteriores.split(/\s*,\s*/).each do |a|
       return true if a == nombre_padre
     end
     false
+  end
+
+  # Override al metodo que transforma el objecto en JSON, se utiliza params
+  # enviar el JSON necesario para el calendario
+  def as_json(options = {})
+    {
+    title: "#{self.proyecto.nombre} - #{self.nombre}",
+    start: self.start_time,
+    end: self.end_time
+    }
   end
 end

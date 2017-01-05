@@ -2,6 +2,7 @@ require 'time'
 require 'date'
 class ProyectosController < ApplicationController
 
+  # Obtiene todos los proyectos de la aplicacion
   def index
     @user = current_user
     if !@user
@@ -11,14 +12,18 @@ class ProyectosController < ApplicationController
     end
   end
 
+  # La vista no necesita ningun parametro
   def new
   end
 
+  # Borra un proyecto de la aplicacion
   def delete
     Proyecto.destroy(params[:id])
     redirect_to proyectos_path
   end
 
+  # Crea un proyecto, comprueba que no se cree en el pasado y que no exista
+  # otro proyecto con el mismo nombre
   def create
     projParams = params[:session]
     @errors = ""
@@ -49,14 +54,18 @@ class ProyectosController < ApplicationController
     end
   end
 
+  # Lista todos los proyectos
   def all
       @proyectos = Proyecto.all
   end
 
+  # Para asignar un jefe de proyecto de necesita la id del proyecto
   def setmanager
         @id_project = params[:id]
   end
 
+  # Asigna un empleado al proyecto, comprueba que tiene la categoria y que no
+  # tiene mas proyectos asignados de los que puede tener
   def setmanagerforproject
     @errors = ""
     manager_username = params[:session][:username]
@@ -84,10 +93,14 @@ class ProyectosController < ApplicationController
     end
   end
 
+  # Modo edicion del proyecto, solo para jefes de proyecto, devuelve a la vista
+  # el proyecto en cuestion
   def edit
     @proyecto = Proyecto.find(params[:id])
   end
 
+  # Inicia el proyecto, con el dia de inicio, se encarga de calcular la duracion
+  # del proyecto completo
   def init
     @proyecto = Proyecto.find(params[:id])
     @proyecto.iniciar_proyecto(params[:proyecto][:fecha_inicio].to_time)
@@ -101,6 +114,8 @@ class ProyectosController < ApplicationController
     redirect_to empleado_proyectos_path(Empleado.find_by(id: session[:user_id]))
   end
 
+  # Muestra la informacion del proyecto, la vista se encarga de gestionar que
+  # puede ver cada empleado
   def show
     @proyecto = Proyecto.find(params[:id])
     @asignacion = AsignacionProyecto.where(empleado_id: current_user.id)

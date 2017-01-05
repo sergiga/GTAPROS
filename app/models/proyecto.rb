@@ -5,6 +5,8 @@ class Proyecto < ApplicationRecord
 
     validates :nombre, presence: true, uniqueness: { case_sensitive: false }
 
+    # Inicia el proyecto el dia especificado y calcula la duracion del mismo
+    # en funcion de las actividades, sus esfuerzos y sus predecesoras
     def iniciar_proyecto(start_time)
       iniciales = actividads.where(anteriores: "")
       iniciales.each do |i|
