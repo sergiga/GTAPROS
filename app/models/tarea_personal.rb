@@ -2,6 +2,7 @@ class TareaPersonal < ApplicationRecord
     belongs_to :empleado
     belongs_to :actividad
 
-    validates :descripcion, presence: true
+    validates :descripcion,:duracion, presence: true
+    validates_numericality_of :duracion, greater_than: 0
     
 end
