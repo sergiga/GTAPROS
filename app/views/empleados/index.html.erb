@@ -2,9 +2,7 @@
 <div class="container">
 <H1 class="title">Todos los Empleados</H1>
 <%= button_to('Guardar nuevo Empleado', new_empleado_url, remote: true, method: :get, :class => 'btn btn-large btn-primary col-md-4 text-center')  %>
-</div>
-
-<div class="pre-scrollable">
+<div class="pre-scrollable container">
     <div class="table-responsive">
     <table class="table">
       <thead>
@@ -28,5 +26,6 @@
       <tbody>
     <% end %>
     </table>
+  </div>
   </div>
 </div>
